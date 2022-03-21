@@ -11,15 +11,16 @@ app.use(bodyParser.json());
 //Route api của Task
 app.use("/taskApi", tasksRoute);
 
+//Chạy app tại port 3000
 app.listen(3000);
 
 //Connect DB
 connectDB = async () => {
   try {
     await mongoose.connect("mongodb://localhost:27017/appDealJobs");
-    console.log("Connected");
+    console.log("Connected to DB success!");
   } catch (error) {
-    console.log(error);
+    console.log("Connect fail: " + error);
   }
 };
 connectDB();

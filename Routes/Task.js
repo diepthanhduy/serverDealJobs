@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
+//Model Task
 const Task = require("../Models/Task");
 
 // Trả về tất cả Task hiện có trong DB
@@ -18,8 +19,9 @@ router.post("/", async (req, res) => {
   const task = new Task({
     Name: req.body.Name,
     Description: req.body.Description,
-    Picture: req.body.Picture,
     Price: req.body.Price,
+    public_id: req.body.public_id,
+    secure_url: req.body.secure_url,
     //Tự động tạo để test API hoàn thành chỉnh lại
     IDUser: "62348b9b576c3e4345f89502",
     IDCategory: "6232090b39d30d71ef40ff6c",
