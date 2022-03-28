@@ -4,12 +4,14 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
 const tasksRoute = require("./Routes/Task");
+const userRoute = require("./Routes/User");
 
 //Sử dụng body-parser để lấy được json từ req
 app.use(bodyParser.json());
 
-//Route api của Task
+//Route api
 app.use("/taskApi", tasksRoute);
+app.use("/user", userRoute);
 
 //Chạy app tại port 3000
 app.listen(3000);

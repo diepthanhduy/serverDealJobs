@@ -19,7 +19,9 @@ const taskSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
-  IDUser: String,
+  NameCreator: String,
+  PhoneCreator: String,
+  AddressCreator: String,
   IDCategory: String,
 });
 
