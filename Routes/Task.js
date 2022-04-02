@@ -4,17 +4,58 @@ const router = express.Router();
 //Model Task
 const Task = require("../Models/Task");
 
-// Trả về tất cả Task hiện có trong DB
+const User = require("../Models/User");
+
+//Update Task (có người Book công việc này)
+router.put("/update", (req, res) => {
+  const dataUpdate = {
+    StatusBook: req.body.StatusBook,
+    IDUserBook: req.body.IDUserBook,
+  };
+  Task.updateOne({ _id: req.body._id }, { $set: dataUpdate })
+    .exec()
+    .then(res.json({ message: "Success" }))
+    .catch((error) => res.json({ message: error }));
+});
+
+//Get Task chưa có người nhận (StatusBook = 0)
 router.get("/", async (req, res) => {
   try {
-    const data = await Task.find({});
+    const data = await Task.find({
+      StatusBook: 0,
+    });
     res.json(data);
   } catch (error) {
     res.json({ message: error });
   }
 });
 
-//Thêm một Task mới vào DB
+//Get task trả về các task mà được user đang đăng nhập đã book
+router.post("/task-booked", async (req, res) => {
+  try {
+    const data = await Task.find({
+      IDUserBook: req.body.IDUserBook,
+      StatusBook: 1,
+    });
+    res.json(data);
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
+
+//Get task trả về các task mà được user đang đăng nhập đã tạo
+router.post("/task-created", async (req, res) => {
+  try {
+    const data = await Task.find({
+      IDCreator: req.body.IDCreator,
+    });
+    res.json(data);
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
+
+//Post Task tạo một task mới
 router.post("/", async (req, res) => {
   const task = new Task({
     Name: req.body.Name,
@@ -22,9 +63,10 @@ router.post("/", async (req, res) => {
     Price: req.body.Price,
     public_id: req.body.public_id,
     secure_url: req.body.secure_url,
-    //Tự động tạo để test API hoàn thành chỉnh lại
-    IDUser: "62348b9b576c3e4345f89502",
-    IDCategory: "6232090b39d30d71ef40ff6c",
+    IDCreator: req.body.IDCreator,
+    NameCreator: req.body.NameCreator,
+    PhoneCreator: req.body.PhoneCreator,
+    AddressCreator: req.body.AddressCreator,
   });
   try {
     const saveTask = await task.save();

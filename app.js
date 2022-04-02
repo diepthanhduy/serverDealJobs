@@ -10,7 +10,7 @@ const userRoute = require("./Routes/User");
 app.use(bodyParser.json());
 
 //Route api
-app.use("/taskApi", tasksRoute);
+app.use("/task", tasksRoute);
 app.use("/user", userRoute);
 
 //Chạy app tại port 3000

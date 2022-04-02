@@ -11,7 +11,7 @@ const taskSchema = mongoose.Schema({
   Price: String,
   public_id: String,
   secure_url: String,
-  Status: {
+  StatusBook: {
     type: Number,
     default: 0,
   },
@@ -22,7 +22,11 @@ const taskSchema = mongoose.Schema({
   NameCreator: String,
   PhoneCreator: String,
   AddressCreator: String,
-  IDCategory: String,
+  IDCreator: String,
+  IDUserBook: {
+    type: String,
+    default: "",
+  },
 });
 
 //Export model Task ra tham số "Task" bên dưới là Task Collection trong DB
