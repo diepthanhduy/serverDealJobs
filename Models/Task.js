@@ -27,6 +27,14 @@ const taskSchema = mongoose.Schema({
     type: String,
     default: "",
   },
+  Latitude: {
+    type: String,
+    default: "",
+  },
+  Longitude: {
+    type: String,
+    default: "",
+  },
 });
 
 //Export model Task ra tham số "Task" bên dưới là Task Collection trong DB

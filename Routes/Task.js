@@ -67,6 +67,8 @@ router.post("/", async (req, res) => {
     NameCreator: req.body.NameCreator,
     PhoneCreator: req.body.PhoneCreator,
     AddressCreator: req.body.AddressCreator,
+    Latitude: req.body.Latitude,
+    Longitude: req.body.Longitude,
   });
   try {
     const saveTask = await task.save();
